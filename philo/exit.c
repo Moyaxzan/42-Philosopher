@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:29:51 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/09 18:38:02 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:57:37 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ void	help(void)
 	write(2, "\t\tIf not specified, the simulation stops when a philo dies.\n", 60);
 }
 
-int	parsing_error(char *str)
+int	parsing_error(char *arg, char *str)
 {
 	write(2, "Parsing error: ", 15);
+	while(arg && *arg)
+		write(2, arg++, 1);
+	if (arg)
+		write(2, ": ", 2);
 	while(str && *str)
-	{
-		write(2, str, 1);
-		str++;
-	}
+		write(2, str++, 1);
 	write(2, "\n\nsee ./philo --help (-h) for usage\n", 37);
 	return (PARSING_ERR);
 }

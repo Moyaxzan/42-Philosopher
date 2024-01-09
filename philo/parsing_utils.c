@@ -6,9 +6,19 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:27:02 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/09 18:30:30 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:37:27 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {

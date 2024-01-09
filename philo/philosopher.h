@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/09 18:31:47 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:37:42 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int		parsing(int argc, char *argv[]);
 
 /*-----------parsing_utils.c------------*/
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strlen(char *str);
 
 /*----------------exit.c----------------*/
 void	help(void);
-int		parsing_error(char *str);
+int		parsing_error(char *arg, char *str);
 int		errnl(char *str, int err_code);
 
 #endif
