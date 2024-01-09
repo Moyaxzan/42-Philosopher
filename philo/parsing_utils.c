@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 15:07:30 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/09 18:33:48 by tsaint-p         ###   ########.fr       */
+/*   Created: 2024/01/09 18:27:02 by tsaint-p          #+#    #+#             */
+/*   Updated: 2024/01/09 18:30:30 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
-
-int	parsing(int argc, char *argv[])
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (argc > 1 && (!ft_strcmp(argv[1], "-h") || !ft_strcmp(argv[1], "--help")))
-		return (help(), 1);
-	if (argc != 5 && argc != 6)
-		parsing_error("wrong number of arguments.");
-	(void)argv;
-	return (0);
+	int	i;
+	int	diff;
+
+	diff = 0;
+	i = 0;
+	while (s2[i] != '\0' && s1[i] != '\0' && diff == 0)
+	{
+		diff = s1[i] - s2[i];
+		i++;
+	}
+	if (diff == 0)
+		diff = s1[i] - s2[i];
+	return (diff);
 }

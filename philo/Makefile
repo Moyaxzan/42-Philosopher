@@ -3,9 +3,9 @@ NAME = philo
 #####	VARIABLES   #####
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = main.c exit.c parsing.c
+SRCS = main.c exit.c parsing.c parsing_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
