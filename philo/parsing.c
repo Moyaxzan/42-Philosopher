@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:07:30 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/09 19:42:17 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:51:19 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	parsing(int argc, char *argv[])
 	int	i;
 
 	i = 1;
-	if (argc > 1 && (!ft_strcmp(argv[1], "-h") || !ft_strcmp(argv[1], "--help")))
+	if (argc > 1 && (!ft_strcmp(argv[1], "-h")
+			|| !ft_strcmp(argv[1], "--help")))
 		return (help(), 1);
 	if (argc != 5 && argc != 6)
 		return (parsing_error(NULL, "wrong number of arguments."));
