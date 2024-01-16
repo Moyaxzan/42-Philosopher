@@ -5,7 +5,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = main.c exit.c parsing.c parsing_utils.c
+SRCS = main.c exit.c parsing.c parsing_utils.c prep.c
 
 OBJS = $(SRCS:.c=.o)
 
