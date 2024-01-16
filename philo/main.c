@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/16 19:08:07 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:32:51 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char *argv[])
 	// usleep(20);
  	// gettimeofday(&philo->tv, NULL);
 	// printf("us : %ld\n", philo->tv.tv_usec);
-	
-	return (exit_all(data, return_val));
+	exit_all(data, return_val);
+	free(data);
+	return (return_val);
 }

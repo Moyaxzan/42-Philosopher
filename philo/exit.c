@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:29:51 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/16 19:06:53 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:23:41 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	exit_all(t_data *data, int err_code)
 		return (err_code);
 	if (data->forks)
 		free(data->forks);
-	free(data);
+	data->forks = NULL;
+	if (data->philosophers)
+		free(data->philosophers);
+	data->philosophers = NULL;
 	return (err_code);
 }
 
