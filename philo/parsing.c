@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:07:30 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/10 01:41:37 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:35:42 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_int(char *arg)
 	return (1);
 }
 
-int	fill_data(t_data *data, char *arg, int i)
+int	fill_philo(t_philo *philo, char *arg, int i)
 {
 	int	val;
 
@@ -43,19 +43,19 @@ int	fill_data(t_data *data, char *arg, int i)
 	if (!val)
 		return (0);
 	else if (i == 1)
-		data->num_of_philo = val;
+		philo->num_of_philo = val;
 	else if (i == 2)
-		data->ttdie = val;
+		philo->ttdie = val;
 	else if (i == 3)
-		data->tteat = val;
+		philo->tteat = val;
 	else if (i == 4)
-		data->ttsleep = val;
+		philo->ttsleep = val;
 	else if (i == 5)
-		data->max_eat = val;
+		philo->max_eat = val;
 	return (val);
 }
 
-int	parsing(t_data *data, int argc, char *argv[])
+int	parsing(t_philo *philo, int argc, char *argv[])
 {
 	int	i;
 
@@ -71,7 +71,7 @@ int	parsing(t_data *data, int argc, char *argv[])
 			return (parsing_error(argv[i], "not a numeric argument."));
 		if (!is_int(argv[i]))
 			return (parsing_error(argv[i], "greater than int"));
-		if (!fill_data(data, argv[i], i))
+		if (!fill_philo(philo, argv[i], i))
 			return (parsing_error(argv[i], "cannot be zero"));
 		i++;
 	}

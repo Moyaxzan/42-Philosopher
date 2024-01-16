@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/10 01:23:56 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:54:09 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,28 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 
-typedef struct s_data
+typedef enum e_state
 {
-	int	num_of_philo;
-	int	ttdie;
-	int	tteat;
-	int	ttsleep;
-	int	max_eat;
-}	t_data;
+	E_SLEEP = 10,
+	E_EAT,
+	E_THINK,
+	E_DIE,
+}	t_state;
+
+typedef struct s_philo
+{
+	int				num_of_philo;
+	int				ttdie;
+	int				tteat;
+	int				ttsleep;
+	int				max_eat;
+	struct timeval	tv;
+}	t_philo;
 
 /*--------------parsing.c---------------*/
-int		parsing(t_data *data, int argc, char *argv[]);
+int		parsing(t_philo *data, int argc, char *argv[]);
 
 /*-----------parsing_utils.c------------*/
 int		ft_strcmp(char *s1, char *s2);
