@@ -6,11 +6,20 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/16 23:32:51 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:22:25 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+time_t	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) < 0)
+		return (-1);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
 
 t_data	*init_data(void)
 {
@@ -26,6 +35,7 @@ t_data	*init_data(void)
 	data->max_eat = 0;
 	data->forks = NULL;
 	data->exit = false;
+	data->forks = NULL;
 	return (data);
 }
 

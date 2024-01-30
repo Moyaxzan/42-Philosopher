@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/16 23:30:23 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/29 22:02:59 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <errno.h>
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdbool.h>
@@ -30,35 +31,38 @@ typedef enum e_state
 	E_DIE,
 }	t_state;
 
+typedef struct s_data	t_data;
+
 typedef struct s_philo
 {
+	int				index;
+	int				nb_eat;
+	t_data			*data;
+	t_state			state; // useful ?
 	pthread_t		thread;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-	int				nb_eat;
-	t_state			state; // useful ?
 }	t_philo;
 
 typedef struct s_data
 {
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	mt_write;
+	int						exit;
+	long int				num_of_philo;
+	long int				ttdie;
+	long int				tteat;
+	long int				ttsleep;
+	long int				max_eat;
+	long int		start_time;
 	t_philo			*philosophers;
-	bool			exit;
-	int				num_of_philo;
-	int				ttdie;
-	int				tteat;
-	int				ttsleep;
-	int				max_eat;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	write_lock;
+	pthread_mutex_t	exit_lock;
+	pthread_mutex_t	start_lock;
 	struct timeval	tv;
 }	t_data;
 
-typedef struct s_routinearg
-{
-	t_data	*data;
-	t_philo	*philo;
-	int		index;
-}	t_routinearg;
+/*--------------main.c---------------*/
+time_t	get_time_ms(void);
 
 /*--------------parsing.c---------------*/
 int		parsing(t_data *data, int argc, char *argv[]);
