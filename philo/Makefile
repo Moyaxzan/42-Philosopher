@@ -1,6 +1,6 @@
+#####	VARIABLES   #####
 NAME = philo
 
-#####	VARIABLES   #####
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
@@ -25,5 +25,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
 
 .PHONY: all clean fclean re
