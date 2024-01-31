@@ -1,11 +1,13 @@
 #####	VARIABLES   #####
-NAME = philo
+NAME =		philo
 
-CC = cc
+CC =		cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS =	-Wall -Wextra -Werror -g
 
-SRCS = main.c exit.c parsing.c parsing_utils.c prep.c routine.c
+SRCS =		main.c exit.c parsing.c parsing_utils.c \
+			prep.c routine.c mutex.c
+		
 
 OBJS = $(SRCS:.c=.o)
 

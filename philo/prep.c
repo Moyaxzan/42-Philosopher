@@ -6,12 +6,11 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/29 22:33:41 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:34:36 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-#include <pthread.h>
 
 t_philo	*init_philosophers(t_data *data)
 {
@@ -34,41 +33,18 @@ t_philo	*init_philosophers(t_data *data)
 	return (philosophers);
 }
 
-void	destroy_forks(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		pthread_mutex_destroy(&data->forks[i]);
-		i++;
-	}
-}
-
 int	init(t_data *data)
 {
 	int	i;
 
 	i = 0;
-
-	if (pthread_mutex_init(&data->write_lock, NULL))
-		return (exit_all(data, FATAL_ERR));
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
-	if (pthread_mutex_init(&data->start_lock, NULL))
-		return (exit_all(data, FATAL_ERR));
-	if (!data->forks)
-		return (exit_all(data, FATAL_ERR));
-
 	data->philosophers = init_philosophers(data);
 	if (!data->philosophers)
 		return (exit_all(data, FATAL_ERR));
-
+	init_mutexes(data);
 	pthread_mutex_lock(&data->start_lock);
 	while (i < data->num_of_philo)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL))
-			return (exit_all(data, FATAL_ERR));
 		if (pthread_create(&data->philosophers[i].thread, NULL, &routine, (void *)&data->philosophers[i]))
 			return (exit_all(data, FATAL_ERR));
 		i++;

@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/29 22:02:59 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:34:47 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 typedef enum e_state
 {
 	E_INIT_STATE = 0,
-	E_SLEEP = 10,
-	E_EAT,
-	E_THINK,
-	E_DIE,
+	E_SLEEP = 10,	//"is sleeping"
+	E_FORK,			//"has taken a fork"
+	E_EAT,			//"is eating"
+	E_THINK,		//"is thinking"
+	E_DIE,			//"died"
 }	t_state;
 
 typedef struct s_data	t_data;
@@ -54,7 +55,7 @@ typedef struct s_data
 	long int				max_eat;
 	long int		start_time;
 	t_philo			*philosophers;
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	**forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	exit_lock;
 	pthread_mutex_t	start_lock;
@@ -63,6 +64,10 @@ typedef struct s_data
 
 /*--------------main.c---------------*/
 time_t	get_time_ms(void);
+
+/*--------------mutex.c---------------*/
+void	destroy_forks(t_data *data);
+int		init_mutexes(t_data *data);
 
 /*--------------parsing.c---------------*/
 int		parsing(t_data *data, int argc, char *argv[]);
