@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/31 13:34:47 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:26:54 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	int				nb_eat;
 	t_data			*data;
 	t_state			state; // useful ?
+	long int		tlst_eat;
 	pthread_t		thread;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
@@ -47,17 +48,17 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	int						exit;
-	long int				num_of_philo;
-	long int				ttdie;
-	long int				tteat;
-	long int				ttsleep;
-	long int				max_eat;
+	int				stop;
+	long int		num_of_philo;
+	long int		ttdie;
+	long int		tteat;
+	long int		ttsleep;
+	long int		max_eat;
 	long int		start_time;
 	t_philo			*philosophers;
 	pthread_mutex_t	**forks;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	exit_lock;
+	pthread_mutex_t	stop_lock;
 	pthread_mutex_t	start_lock;
 	struct timeval	tv;
 }	t_data;

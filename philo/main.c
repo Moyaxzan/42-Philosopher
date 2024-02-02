@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/29 15:22:25 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:01:22 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ time_t	get_time_ms(void)
 	if (gettimeofday(&tv, NULL) < 0)
 		return (-1);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+int	ft_join(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		pthread_join(data->philosophers[i].thread, NULL);
+		i++;
+	}
+	return (0);
 }
 
 t_data	*init_data(void)
@@ -51,12 +64,7 @@ int	main(int argc, char *argv[])
 	if (return_val)
 		return (return_val);
 	return_val = init(data);
- 	// gettimeofday(&philo->tv, NULL);
-	// printf("us : %ld\n", philo->tv.tv_usec);
-	// fflush(stdout);
-	// usleep(20);
- 	// gettimeofday(&philo->tv, NULL);
-	// printf("us : %ld\n", philo->tv.tv_usec);
+	ft_join(data);
 	exit_all(data, return_val);
 	free(data);
 	return (return_val);
