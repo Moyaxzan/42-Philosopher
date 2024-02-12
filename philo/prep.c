@@ -6,11 +6,12 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 14:44:58 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:16:45 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <pthread.h>
 
 t_philo	*init_philosophers(t_data *data)
 {
@@ -31,7 +32,7 @@ t_philo	*init_philosophers(t_data *data)
 		//TODO: protect when only one philo
 		philosophers[i].r_fork = data->forks
 			[(i - 1 + data->num_of_philo) % data->num_of_philo];
-		printf("philo %d : r : %d, l : %ld\n", i, i, (i - 1 + data->num_of_philo) % data->num_of_philo);
+		pthread_mutex_init(&philosophers->lock_lst_eat, NULL);
 		i++;
 	}
 	return (philosophers);

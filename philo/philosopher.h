@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/02 11:26:54 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:14:31 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	lock_lst_eat; //TODO : init it
 }	t_philo;
 
 typedef struct s_data
@@ -64,30 +65,31 @@ typedef struct s_data
 }	t_data;
 
 /*--------------main.c---------------*/
-time_t	get_time_ms(void);
+time_t		get_time_ms(void);
+long int	print_msg(int num, t_state state);
 
 /*--------------mutex.c---------------*/
-void	destroy_forks(t_data *data);
-int		init_mutexes(t_data *data);
+void		destroy_forks(t_data *data);
+int			init_mutexes(t_data *data);
 
 /*--------------parsing.c---------------*/
-int		parsing(t_data *data, int argc, char *argv[]);
+int			parsing(t_data *data, int argc, char *argv[]);
 
 /*-----------parsing_utils.c------------*/
-int		ft_strcmp(char *s1, char *s2);
-int		ft_strlen(char *str);
-int		ft_atoi(const char *nptr);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_strlen(char *str);
+int			ft_atoi(const char *nptr);
 
 /*----------------exit.c----------------*/
-int		exit_all(t_data *data, int err_code);
-void	help(void);
-int		parsing_error(char *arg, char *str);
-int		errnl(char *str, int err_code);
+int			exit_all(t_data *data, int err_code);
+void		help(void);
+int			parsing_error(char *arg, char *str);
+int			errnl(char *str, int err_code);
 
 /*----------------prep.c----------------*/
-int		init(t_data *data);
+int			init(t_data *data);
 
 /*--------------routine.c---------------*/
-void	*routine(void *vdata);
+void		*routine(void *vdata);
 
 #endif

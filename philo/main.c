@@ -6,11 +6,29 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 13:12:53 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:20:12 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+long int	print_msg(int num, t_state state)
+{
+	long int	time;
+
+	time = get_time_ms();
+	if (state == E_SLEEP)
+		printf("%ld %d is sleeping\n", time, num);
+	if (state == E_FORK)
+		printf("%ld %d has taken a fork\n", time, num);
+	if (state == E_EAT)
+		printf("%ld %d is eating\n", time, num);
+	if (state == E_THINK)
+		printf("%ld %d is thinking\n", time, num);
+	if (state == E_DIE)
+		printf("%ld %d died\n", time, num);
+	return (time);
+}
 
 time_t	get_time_ms(void)
 {

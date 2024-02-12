@@ -6,12 +6,11 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 16:09:40 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:22:20 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-#include <pthread.h>
 
 int	stop(t_data *data)
 {
@@ -25,9 +24,29 @@ int	stop(t_data *data)
 	return (0);
 }
 
-int	eatnsleep(t_philo *philo)
+int	eatnsleep(t_data *data, t_philo *philo)
 {
-	
+	long int	eat_time;
+
+	if (!pthread_mutex_lock(philo->r_fork))
+		print_msg(philo->index, E_FORK);
+	if (!pthread_mutex_lock(philo->l_fork))
+		print_msg(philo->index, E_FORK);
+	eat_time = print_msg(philo->index, E_EAT);
+	if (!stop(data))
+	{
+		philo->state = E_EAT;
+		usleep(data->tteat * 1000);
+		pthread_mutex_lock(&philo->lock_lst_eat);
+		philo->tlst_eat = eat_time;
+		pthread_mutex_unlock(&philo->lock_lst_eat);
+		philo->nb_eat++;
+	}
+	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(philo->r_fork);
+	philo->state = E_SLEEP;
+	usleep(data->ttsleep * 1000);
+	return (0);
 }
 
 void	*routine(void *vphilo)
