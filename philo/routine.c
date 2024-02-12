@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/02 13:11:43 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:09:40 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	stop(t_data *data)
 	return (0);
 }
 
-// int	eatnsleep(t_philo *philo)
-// {
-//
-// }
+int	eatnsleep(t_philo *philo)
+{
+	
+}
 
 void	*routine(void *vphilo)
 {
