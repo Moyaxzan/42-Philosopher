@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 22:14:31 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:17:59 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_data
 
 /*--------------main.c---------------*/
 time_t		get_time_ms(void);
-long int	print_msg(int num, t_state state);
+long int	print_msg(t_data *data, int num, t_state state);
 
 /*--------------mutex.c---------------*/
 void		destroy_forks(t_data *data);

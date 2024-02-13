@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 22:22:20 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:20:19 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	eatnsleep(t_data *data, t_philo *philo)
 	long int	eat_time;
 
 	if (!pthread_mutex_lock(philo->r_fork))
-		print_msg(philo->index, E_FORK);
+		print_msg(data, philo->index, E_FORK);
 	if (!pthread_mutex_lock(philo->l_fork))
-		print_msg(philo->index, E_FORK);
-	eat_time = print_msg(philo->index, E_EAT);
+		print_msg(data, philo->index, E_FORK);
+	eat_time = print_msg(data, philo->index, E_EAT);
 	if (!stop(data))
 	{
 		philo->state = E_EAT;
@@ -57,14 +57,10 @@ void	*routine(void *vphilo)
 	pthread_mutex_lock(&philo->data->start_lock);
 	pthread_mutex_unlock(&philo->data->start_lock);
 	philo->tlst_eat = philo->data->start_time;
-	long time = get_time_ms();
-	pthread_mutex_lock(&philo->data->write_lock);
-	printf("philo %d: %ld\n", philo->index, time - philo->data->start_time);
-	fflush(stdout);
-	pthread_mutex_unlock(&philo->data->write_lock);
-	while (!stop(philo->data))
-	{
-
-	}
+	eatnsleep(philo->data, philo);
+	// while (!stop(philo->data))
+	// {
+	//
+	// }
 	return (NULL);
 }
