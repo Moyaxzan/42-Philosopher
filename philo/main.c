@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/13 14:24:37 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:41:46 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int argc, char *argv[])
 	if (return_val)
 		return (return_val);
 	return_val = init(data);
+	ft_monitor(data);
 	ft_join(data);
 	exit_all(data, return_val);
 	free(data);

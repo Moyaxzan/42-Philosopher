@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/13 14:17:59 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:05:51 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_data
 	pthread_mutex_t	**forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	stop_lock;
-	pthread_mutex_t	start_lock;
+	pthread_mutex_t	start_lock; //needed ? because unchanged
 	struct timeval	tv;
 }	t_data;
 
@@ -91,5 +91,9 @@ int			init(t_data *data);
 
 /*--------------routine.c---------------*/
 void		*routine(void *vdata);
+int			ft_eat(t_data *data, t_philo *philo);
+
+/*--------------monitor.c---------------*/
+int			ft_monitor(t_data *data);
 
 #endif

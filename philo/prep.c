@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/12 22:16:45 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:26:11 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_philo	*init_philosophers(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		philosophers[i].index = i;
+		philosophers[i].index = i + 1;
 		philosophers[i].data = data;
 		philosophers[i].nb_eat = 0;
 		philosophers[i].state = E_INIT_STATE;
