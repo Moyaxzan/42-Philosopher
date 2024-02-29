@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/27 16:41:46 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:57:48 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_data	*init_data(void)
 	data->ttdie = 0;
 	data->tteat = 0;
 	data->ttsleep = 0;
-	data->max_eat = 0;
+	data->max_eat = -1;
 	data->forks = NULL;
 	data->stop = 0;
 	data->forks = NULL;

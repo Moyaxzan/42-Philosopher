@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/27 17:59:51 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:46:45 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_dead(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->lock_lst_eat);
-	if (get_time_ms() - philo->tlst_eat > data->ttdie)
+	if (get_time_ms() - philo->tlst_eat >= data->ttdie)
 	{
 		pthread_mutex_unlock(&philo->lock_lst_eat);
 		return (1);
@@ -34,13 +34,15 @@ int	ft_monitor(t_data *data)
 	i = 0;
 	while (!stop)
 	{
+		usleep(100);
 		if (i == data->num_of_philo)
 			i = 0;
 		if (is_dead(data, &data->philosophers[i]))
+		{
+			print_msg(data, data->philosophers[i].index, E_DIE);
 			stop = 1;
+		}
 		i++;
-		usleep(10000 / data->num_of_philo - 100);
-		print_msg(data, 100 + i, E_DIE);
 	}
 	pthread_mutex_lock(&data->stop_lock);
 	data->stop = 1;
