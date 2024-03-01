@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/29 13:57:48 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:27:43 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ long int	print_msg(t_data *data, int num, t_state state)
 	long int	time;
 
 	pthread_mutex_lock(&data->write_lock);
-	pthread_mutex_lock(&data->start_lock);
 	time = get_time_ms() - data->start_time;
-	pthread_mutex_unlock(&data->start_lock);
 	if (state == E_SLEEP)
 		printf("%ld %d is sleeping\n", time, num);
 	if (state == E_FORK)

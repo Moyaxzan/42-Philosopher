@@ -6,11 +6,12 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/29 14:11:24 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:31:44 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <stdio.h>
 #include <unistd.h>
 
 int	stop(t_data *data)
@@ -29,6 +30,8 @@ int	ft_think(t_data *data, t_philo *philo)
 {
 	long	ttthink;
 
+	if (stop(data))
+		return (1);
 	print_msg(data, philo->index, E_THINK);
 	if (data->num_of_philo % 2 == 0)
 		return (0);
@@ -56,6 +59,8 @@ int	ft_eat(t_data *data, t_philo *philo)
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_lock(&philo->lock_lst_eat);
 	philo->tlst_eat = eat_time;
+	dprintf(2, "%d just ate at %ld\n", philo->index, philo->tlst_eat);
+	fflush(stderr);
 	pthread_mutex_unlock(&philo->lock_lst_eat);
 	philo->nb_eat++;
 	// no need to lock if philo check his nb of eat
@@ -99,7 +104,8 @@ void	*routine(void *vphilo)
 			break ;
 		print_msg(philo->data, philo->index, E_SLEEP);
 		usleep(philo->data->ttsleep * 1000);
-		ft_think(philo->data, philo);
+		if (ft_think(philo->data, philo))
+			break ;
 	}
 	return (NULL);
 }
