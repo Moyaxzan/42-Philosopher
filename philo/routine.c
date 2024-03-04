@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 15:50:53 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:46:24 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,15 @@ void	*routine(void *vphilo)
 	set_offset(philo->data, philo);
 	while (!stop(philo->data))
 	{
-		if (is_full(philo))
-			break ;
 		if (ft_eat(philo->data, philo))
 			break ;
+		if (is_full(philo))
+		{
+			pthread_mutex_lock(&philo->lock_full);
+			philo->full = true;
+			pthread_mutex_unlock(&philo->lock_full);
+			break ;
+		}
 		print_msg(philo->data, philo->index, E_SLEEP);
 		usleep(philo->data->ttsleep * 1000);
 		if (ft_think(philo->data, philo))

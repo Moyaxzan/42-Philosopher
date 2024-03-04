@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 14:49:06 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:46:43 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 {
 	int				index;
 	int				nb_eat;
+	bool			full;
 	t_data			*data;
 	t_state			state; // useful ?
 	long int		tlst_eat;
@@ -45,6 +46,7 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	lock_lst_eat; //TODO : init it
+	pthread_mutex_t	lock_full;
 }	t_philo;
 
 typedef struct s_data
@@ -90,10 +92,12 @@ int			errnl(char *str, int err_code);
 int			init(t_data *data);
 
 /*--------------routine.c---------------*/
+int			is_full(t_philo *philo);
 void		*routine(void *vdata);
 int			ft_eat(t_data *data, t_philo *philo);
 
 /*--------------monitor.c---------------*/
 int			ft_monitor(t_data *data);
+int			all_full(t_data *data);
 
 #endif

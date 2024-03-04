@@ -6,11 +6,12 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 12:13:48 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:56:29 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <pthread.h>
 
 int	is_dead(t_data *data, t_philo *philo)
 {
@@ -29,6 +30,24 @@ int	is_dead(t_data *data, t_philo *philo)
 	return (0);
 }
 
+int	all_full(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		pthread_mutex_lock(&data->philosophers[i].lock_full);
+		if (data->philosophers[i].full == false)
+		{
+			pthread_mutex_unlock(&data->philosophers[i].lock_full);
+			return (0);
+		}
+		pthread_mutex_unlock(&data->philosophers[i].lock_full);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_monitor(t_data *data)
 {
@@ -37,7 +56,7 @@ int	ft_monitor(t_data *data)
 
 	stop = 0;
 	i = 0;
-	while (!stop)
+	while (!stop && !all_full(data))
 	{
 		usleep(9000 / data->num_of_philo);
 		if (i == data->num_of_philo)
