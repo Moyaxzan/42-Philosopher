@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/02/27 16:26:11 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:56:58 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_philo	*init_philosophers(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
+		philosophers[i].tlst_eat = -1; 
 		philosophers[i].index = i + 1;
 		philosophers[i].data = data;
 		philosophers[i].nb_eat = 0;
@@ -32,6 +33,8 @@ t_philo	*init_philosophers(t_data *data)
 		//TODO: protect when only one philo
 		philosophers[i].r_fork = data->forks
 			[(i - 1 + data->num_of_philo) % data->num_of_philo];
+		// dprintf(2, "%d got fork %d and %ld\n", philosophers[i].index, i,(i - 1 + data->num_of_philo) % data->num_of_philo);
+		// fflush(stderr);
 		pthread_mutex_init(&philosophers->lock_lst_eat, NULL);
 		i++;
 	}

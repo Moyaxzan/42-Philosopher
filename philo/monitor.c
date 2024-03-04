@@ -6,24 +6,26 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/01 18:31:53 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:13:48 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-#include <stdio.h>
 
 int	is_dead(t_data *data, t_philo *philo)
 {
+	long	lst_eat;
+
 	pthread_mutex_lock(&philo->lock_lst_eat);
-	dprintf(2, "%ld >= %ld \n", get_time_ms() - philo->tlst_eat, data->ttdie);
-	fflush(stderr);
-	if (get_time_ms() - philo->tlst_eat >= data->ttdie)
-	{
-		pthread_mutex_unlock(&philo->lock_lst_eat);
-		return (1);
-	}
+	if (philo->tlst_eat == -1)
+		lst_eat = data->start_time;
+	else
+		lst_eat = philo->tlst_eat;
 	pthread_mutex_unlock(&philo->lock_lst_eat);
+	// dprintf(2, "philo %d : %ld - %ld >= %ld \n", philo->index, get_time_ms(), lst_eat, data->ttdie);
+	// fflush(stderr);
+	if (get_time_ms() - lst_eat >= data->ttdie)
+		return (1);
 	return (0);
 }
 
@@ -50,5 +52,6 @@ int	ft_monitor(t_data *data)
 		}
 		i++;
 	}
+	// exit_all(data, 0);
 	return (0);
 }

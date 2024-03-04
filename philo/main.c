@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/01 18:27:43 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:27:50 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,37 @@ long int	print_msg(t_data *data, int num, t_state state)
 {
 	long int	time;
 
-	pthread_mutex_lock(&data->write_lock);
-	time = get_time_ms() - data->start_time;
+	time = get_time_ms();
 	if (state == E_SLEEP)
-		printf("%ld %d is sleeping\n", time, num);
-	if (state == E_FORK)
-		printf("%ld %d has taken a fork\n", time, num);
-	if (state == E_EAT)
-		printf("%ld %d is eating\n", time, num);
-	if (state == E_THINK)
-		printf("%ld %d is thinking\n", time, num);
-	if (state == E_DIE)
-		printf("%ld %d died\n", time, num);
-	pthread_mutex_unlock(&data->write_lock);
+	{
+		pthread_mutex_lock(&data->write_lock);
+		printf("%ld %d is sleeping\n", time - data->start_time, num);
+		pthread_mutex_unlock(&data->write_lock);
+	}
+	else if (state == E_FORK)
+	{
+		pthread_mutex_lock(&data->write_lock);
+		printf("%ld %d has taken a fork\n", time - data->start_time, num);
+		pthread_mutex_unlock(&data->write_lock);
+	}
+	else if (state == E_EAT)
+	{
+		pthread_mutex_lock(&data->write_lock);
+		printf("%ld %d is eating\n", time - data->start_time, num);
+		pthread_mutex_unlock(&data->write_lock);
+	}
+	else if (state == E_THINK)
+	{
+		pthread_mutex_lock(&data->write_lock);
+		printf("%ld %d is thinking\n", time - data->start_time, num);
+		pthread_mutex_unlock(&data->write_lock);
+	}
+	else
+	{
+		pthread_mutex_lock(&data->write_lock);
+		printf("%ld %d died\n", time - data->start_time, num);
+		pthread_mutex_unlock(&data->write_lock);
+	}
 	return (time);
 }
 
