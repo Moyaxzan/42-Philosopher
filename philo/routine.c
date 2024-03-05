@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 15:50:21 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:29:09 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,15 @@ int	ft_think(t_data *data, t_philo *philo)
 
 int	ft_pickup_forks(t_data *data, t_philo *philo)
 {
-	if (philo->index % 2)
+	if (data->num_of_philo == 1)
+	{
+		if (!pthread_mutex_lock(philo->l_fork))
+			print_msg(data, philo->index, E_FORK);
+		while (!stop(data))
+			usleep(5000);
+		return (1);
+	}
+	else if (philo->index % 2)
 	{
 		if (!pthread_mutex_lock(philo->r_fork))
 			print_msg(data, philo->index, E_FORK);
