@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 16:29:09 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:03:15 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,23 @@ void	set_offset(t_data *data, t_philo *philo)
 	if (philo->data->num_of_philo % 2)
 	{
 		if (philo->index == data->num_of_philo)
+		{
+			print_msg(data, philo->index, E_THINK);
 			usleep((data->tteat - 1) * 1000 * 2);
+		}
 		else if (philo->index % 2)
+		{
+			print_msg(data, philo->index, E_THINK);
 			usleep((data->tteat - 1) * 1000);
+		}
 	}
 	else
 	{
 		if (philo->index % 2 == 0)
+		{
+			print_msg(data, philo->index, E_THINK);
 			usleep((data->tteat - 1) * 1000);
+		}
 	}
 }
 
