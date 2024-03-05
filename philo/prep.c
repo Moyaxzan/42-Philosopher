@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 16:48:20 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:35:11 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_philo	*init_philosophers(t_data *data)
 		philosophers[i].index = i + 1;
 		philosophers[i].data = data;
 		philosophers[i].nb_eat = 0;
-		philosophers[i].state = E_INIT_STATE;
 		philosophers[i].l_fork = data->forks[i];
 		//TODO: protect when only one philo
 		philosophers[i].r_fork = data->forks

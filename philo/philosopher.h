@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 16:46:43 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:34:52 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_philo
 	int				nb_eat;
 	bool			full;
 	t_data			*data;
-	t_state			state; // useful ?
 	long int		tlst_eat;
 	pthread_t		thread;
 	pthread_mutex_t	*r_fork;

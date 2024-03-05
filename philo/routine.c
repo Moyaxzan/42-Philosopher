@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 16:46:24 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:34:48 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ int	ft_think(t_data *data, t_philo *philo)
 	if (stop(data))
 		return (1);
 	print_msg(data, philo->index, E_THINK);
-	if (data->num_of_philo % 2 == 0)
-		return (0);
-	ttthink = (data->tteat * 2) - data->ttsleep;
-	if (ttthink < 0)
-		ttthink = 0;
-	usleep(ttthink * 0.42);
+	if (data->num_of_philo % 2)
+		ttthink = 2 * data->tteat - data->ttsleep;
+	else
+		ttthink = data->tteat - data->ttsleep;
+	usleep(ttthink);
 	return (0);
 }
 
@@ -68,15 +67,14 @@ int	ft_eat(t_data *data, t_philo *philo)
 	if (ft_pickup_forks(data, philo))
 		return (1);
 	eat_time = print_msg(data, philo->index, E_EAT);
-	philo->state = E_EAT;
+	pthread_mutex_lock(&philo->lock_lst_eat);
+	philo->tlst_eat = eat_time;
+	pthread_mutex_unlock(&philo->lock_lst_eat);
 	usleep(data->tteat * 1000);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	pthread_mutex_lock(&philo->lock_lst_eat);
-	philo->tlst_eat = eat_time;
 	// dprintf(2, "%d just ate at %ld\n", philo->index, philo->tlst_eat);
 	// fflush(stderr);
-	pthread_mutex_unlock(&philo->lock_lst_eat);
 	philo->nb_eat++;
 	// no need to lock if philo check his nb of eat
 	return (0);
@@ -121,8 +119,11 @@ void	*routine(void *vphilo)
 			pthread_mutex_unlock(&philo->lock_full);
 			break ;
 		}
-		print_msg(philo->data, philo->index, E_SLEEP);
-		usleep(philo->data->ttsleep * 1000);
+		if (!stop(philo->data))
+		{
+			print_msg(philo->data, philo->index, E_SLEEP);
+			usleep(philo->data->ttsleep * 1000);
+		}
 		if (ft_think(philo->data, philo))
 			break ;
 	}
