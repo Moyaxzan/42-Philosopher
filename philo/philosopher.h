@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 11:34:52 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:49:15 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int			errnl(char *str, int err_code);
 int			init(t_data *data);
 
 /*--------------routine.c---------------*/
+int			stop(t_data *data);
 int			is_full(t_philo *philo);
 void		*routine(void *vdata);
 int			ft_eat(t_data *data, t_philo *philo);

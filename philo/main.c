@@ -6,16 +6,19 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 16:23:03 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:54:06 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <pthread.h>
 
 long int	print_msg(t_data *data, int num, t_state state)
 {
 	long int	time;
 
+	if (stop(data) && state != E_DIE)
+		return (1);
 	time = get_time_ms();
 	if (state == E_SLEEP)
 	{
