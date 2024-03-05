@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 15:51:49 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:12:48 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_data
 	struct timeval	tv;
 }	t_data;
 
+/*--------------actioins.c---------------*/
+int			ft_eat(t_data *data, t_philo *philo);
+int			ft_think(t_data *data, t_philo *philo);
+
 /*--------------main.c---------------*/
 time_t		get_time_ms(void);
 long int	print_msg(t_data *data, int num, t_state state);
@@ -91,13 +95,12 @@ int			errnl(char *str, int err_code);
 int			init(t_data *data);
 
 /*--------------routine.c---------------*/
-int			stop(t_data *data);
 int			is_full(t_philo *philo);
 void		*routine(void *vdata);
-int			ft_eat(t_data *data, t_philo *philo);
 
 /*--------------monitor.c---------------*/
 int			ft_monitor(t_data *data);
 int			all_full(t_data *data);
+int			stop(t_data *data);
 
 #endif

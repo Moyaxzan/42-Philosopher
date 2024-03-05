@@ -6,12 +6,24 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 15:48:28 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:09:47 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 #include <pthread.h>
+
+int	stop(t_data *data)
+{
+	pthread_mutex_lock(&data->stop_lock);
+	if (data->stop)
+	{
+		pthread_mutex_unlock(&data->stop_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&data->stop_lock);
+	return (0);
+}
 
 int	is_dead(t_data *data, t_philo *philo)
 {
