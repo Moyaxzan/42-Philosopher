@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 13:49:15 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:51:49 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 typedef enum e_state
 {
 	E_INIT_STATE = 0,
-	E_SLEEP = 10,	//"is sleeping"
-	E_FORK,			//"has taken a fork"
-	E_EAT,			//"is eating"
-	E_THINK,		//"is thinking"
-	E_DIE,			//"died"
+	E_SLEEP = 10,
+	E_FORK,
+	E_EAT,
+	E_THINK,
+	E_DIE,
 }	t_state;
 
 typedef struct s_data	t_data;
@@ -61,7 +61,7 @@ typedef struct s_data
 	pthread_mutex_t	**forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	stop_lock;
-	pthread_mutex_t	start_lock; //needed ? because unchanged
+	pthread_mutex_t	start_lock;
 	struct timeval	tv;
 }	t_data;
 

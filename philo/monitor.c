@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 13:45:35 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:48:28 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	is_dead(t_data *data, t_philo *philo)
 	else
 		lst_eat = philo->tlst_eat;
 	pthread_mutex_unlock(&philo->lock_lst_eat);
-	// dprintf(2, "philo %d : %ld - %ld >= %ld \n", philo->index, get_time_ms(), lst_eat, data->ttdie);
-	// fflush(stderr);
 	if (get_time_ms() - lst_eat >= data->ttdie)
 		return (1);
 	return (0);
@@ -71,6 +69,5 @@ int	ft_monitor(t_data *data)
 		}
 		i++;
 	}
-	// exit_all(data, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 15:04:16 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:50:21 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ int	ft_eat(t_data *data, t_philo *philo)
 	pthread_mutex_unlock(&philo->lock_lst_eat);
 	usleep(data->tteat * 1000);
 	ft_release_forks(philo);
-	// dprintf(2, "%d just ate at %ld\n", philo->index, philo->tlst_eat);
-	// fflush(stderr);
 	philo->nb_eat++;
-	// no need to lock if philo check his nb of eat
 	return (0);
 }
 

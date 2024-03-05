@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 11:35:11 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:49:59 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_philo	*init_philosophers(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		philosophers[i].tlst_eat = -1; 
+		philosophers[i].tlst_eat = -1;
 		philosophers[i].full = false;
 		philosophers[i].index = i + 1;
 		philosophers[i].data = data;
@@ -32,9 +32,7 @@ t_philo	*init_philosophers(t_data *data)
 		philosophers[i].l_fork = data->forks[i];
 		//TODO: protect when only one philo
 		philosophers[i].r_fork = data->forks
-			[(i - 1 + data->num_of_philo) % data->num_of_philo];
-		// dprintf(2, "%d got fork %d and %ld\n", philosophers[i].index, i,(i - 1 + data->num_of_philo) % data->num_of_philo);
-		// fflush(stderr);
+		[(i - 1 + data->num_of_philo) % data->num_of_philo];
 		pthread_mutex_init(&philosophers->lock_lst_eat, NULL);
 		pthread_mutex_init(&philosophers->lock_full, NULL);
 		i++;
@@ -54,7 +52,8 @@ int	init(t_data *data)
 	pthread_mutex_lock(&data->start_lock);
 	while (i < data->num_of_philo)
 	{
-		if (pthread_create(&data->philosophers[i].thread, NULL, &routine, (void *)&data->philosophers[i]))
+		if (pthread_create(&data->philosophers[i].thread,
+				NULL, &routine, (void *)&data->philosophers[i]))
 			return (exit_all(data, FATAL_ERR));
 		i++;
 	}

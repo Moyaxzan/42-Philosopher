@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 13:54:06 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:48:05 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_join(t_data *data)
 t_data	*init_data(void)
 {
 	t_data	*data;
-	
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
