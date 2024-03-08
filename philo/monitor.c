@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 12:19:43 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:05:38 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_monitor(t_data *data)
 	i = 0;
 	while (!stop && !all_full(data))
 	{
-		usleep(5000 / data->num_of_philo);
+		usleep(1000 / data->num_of_philo);
 		if (i == data->num_of_philo)
 			i = 0;
 		if (is_dead(data, &data->philosophers[i]))

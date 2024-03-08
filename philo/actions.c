@@ -6,11 +6,12 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 23:11:17 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 23:11:52 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:48:38 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include <pthread.h>
 
 int	ft_think(t_data *data, t_philo *philo)
 {
@@ -30,12 +31,15 @@ int	ft_think(t_data *data, t_philo *philo)
 
 int	ft_pickup_forks(t_data *data, t_philo *philo)
 {
+	if (stop(data))
+		return (1);
 	if (data->num_of_philo == 1)
 	{
 		if (!pthread_mutex_lock(philo->l_fork))
 			print_msg(data, philo->index, E_FORK);
 		while (!stop(data))
 			usleep(5000);
+		pthread_mutex_unlock(philo->l_fork);
 		return (1);
 	}
 	else if (philo->index % 2)
