@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 23:11:17 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 16:49:47 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:08:15 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_think(t_data *data, t_philo *philo)
 		ttthink = 2 * data->tteat - data->ttsleep - 1;
 	if (ttthink < 0)
 		ttthink = 0;
-	usleep(ttthink * 1000);
+	my_msleep(data, ttthink);
 	return (0);
 }
 
@@ -85,7 +85,7 @@ int	ft_eat(t_data *data, t_philo *philo)
 	pthread_mutex_lock(&philo->lock_lst_eat);
 	philo->tlst_eat = eat_time;
 	pthread_mutex_unlock(&philo->lock_lst_eat);
-	usleep(data->tteat * 1000);
+	my_msleep(data, data->tteat);
 	ft_release_forks(philo);
 	philo->nb_eat++;
 	return (0);

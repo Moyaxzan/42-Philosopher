@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:05:58 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 11:56:23 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:30:09 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[])
 		return (FATAL_ERR);
 	return_val = parsing(data, argc, argv);
 	if (return_val)
-		return (return_val);
+		return (free(data), return_val);
 	return_val = init(data);
 	ft_monitor(data);
 	ft_join(data);

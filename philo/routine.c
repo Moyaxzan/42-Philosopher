@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 22:42:25 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 12:19:06 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:13:32 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	set_offset(t_data *data, t_philo *philo)
 		if (philo->index == data->num_of_philo)
 		{
 			print_msg(data, philo->index, E_THINK);
-			usleep((data->tteat - 1) * 1000 * 2);
+			my_msleep(data, (data->tteat - 1) * 2);
 		}
 		else if (philo->index % 2)
 		{
 			print_msg(data, philo->index, E_THINK);
-			usleep((data->tteat - 1) * 1000);
+			my_msleep(data, (data->tteat - 1));
 		}
 	}
 	else
@@ -38,7 +38,7 @@ void	set_offset(t_data *data, t_philo *philo)
 		if (philo->index % 2 == 0)
 		{
 			print_msg(data, philo->index, E_THINK);
-			usleep((data->tteat - 1) * 1000);
+			my_msleep(data, (data->tteat - 1));
 		}
 	}
 }
@@ -64,7 +64,7 @@ void	*routine(void *vphilo)
 		if (!stop(philo->data))
 		{
 			print_msg(philo->data, philo->index, E_SLEEP);
-			usleep(philo->data->ttsleep * 1000);
+			my_msleep(philo->data, philo->data->ttsleep);
 		}
 		if (ft_think(philo->data, philo))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:07:30 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/01/16 19:26:17 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:19:50 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	is_int(char *arg)
 {
 	int	len;
 
+	while (*arg && *arg == '0')
+		arg++;
+	if (!*arg)
+		return (1);
 	len = ft_strlen(arg);
 	if (len > 11)
 		return (0);

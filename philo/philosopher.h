@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:10:16 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 16:52:05 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:07:33 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ int			stop(t_data *data);
 /*-----------------utils.c---------------*/
 time_t		get_time_ms(void);
 long int	print_msg(t_data *data, int num, t_state state);
+void		my_msleep(t_data *data, long int msec);
 
 #endif
