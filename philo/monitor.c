@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 11:48:02 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:19:43 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int	ft_monitor(t_data *data)
 		if (is_dead(data, &data->philosophers[i]))
 		{
 			stop = 1;
-			pthread_mutex_lock(&data->stop_lock);
-			data->stop = 1;
-			pthread_mutex_unlock(&data->stop_lock);
 			print_msg(data, data->philosophers[i].index, E_DIE);
 		}
 		i++;
 	}
+	pthread_mutex_lock(&data->stop_lock);
+	data->stop = 1;
+	pthread_mutex_unlock(&data->stop_lock);
 	return (0);
 }
