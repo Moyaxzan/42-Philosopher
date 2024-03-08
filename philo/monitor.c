@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:42:01 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 23:09:47 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:48:02 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	stop(t_data *data)
 	pthread_mutex_lock(&data->stop_lock);
 	if (data->stop)
 	{
-		pthread_mutex_unlock(&data->stop_lock);
+		pthread_mutex_unlock(&(data->stop_lock));
 		return (1);
 	}
 	pthread_mutex_unlock(&data->stop_lock);

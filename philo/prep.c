@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/05 16:23:08 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:58:29 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ t_philo	*init_philosophers(t_data *data)
 			[(i - 1 + data->num_of_philo) % data->num_of_philo];
 		else
 			philosophers[i].r_fork = NULL;
-		pthread_mutex_init(&philosophers->lock_lst_eat, NULL);
-		pthread_mutex_init(&philosophers->lock_full, NULL);
+		if (pthread_mutex_init(&(philosophers[i].lock_lst_eat), NULL)
+			|| pthread_mutex_init(&philosophers[i].lock_full, NULL))
+			return (NULL);
 		i++;
 	}
 	return (philosophers);

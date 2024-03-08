@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:47:49 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/04 14:56:02 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:52:45 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	init_mutexes(t_data *data)
 		}
 		i++;
 	}
+	if (pthread_mutex_init(&data->stop_lock, NULL))
+		return (1);
 	if (pthread_mutex_init(&data->write_lock, NULL))
 		return (destroy_forks(data), 1);
 	if (pthread_mutex_init(&data->start_lock, NULL))
