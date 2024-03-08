@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:47:49 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 11:52:45 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:50:45 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	init_mutexes(t_data *data)
 	data->forks = malloc(sizeof(pthread_mutex_t *) * data->num_of_philo);
 	if (!data->forks)
 		return (1);
-	i = 0;
-	while (i < data->num_of_philo)
+	i = -1;
+	while (++i < data->num_of_philo)
 	{
 		data->forks[i] = malloc(sizeof(pthread_mutex_t));
 		if (!data->forks[i] || pthread_mutex_init(data->forks[i], NULL))
@@ -49,7 +49,6 @@ int	init_mutexes(t_data *data)
 			data->forks[i] = NULL;
 			return (destroy_forks(data), 1);
 		}
-		i++;
 	}
 	if (pthread_mutex_init(&data->stop_lock, NULL))
 		return (1);

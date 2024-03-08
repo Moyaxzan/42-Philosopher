@@ -6,7 +6,7 @@
 /*   By: tsaint-p <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:57 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 11:58:29 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:51:44 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_philo	*init_philosophers(t_data *data)
 	philosophers = malloc(sizeof(t_philo) * (data->num_of_philo));
 	if (!philosophers)
 		return (NULL);
-	i = 0;
-	while (i < data->num_of_philo)
+	i = -1;
+	while (++i < data->num_of_philo)
 	{
 		philosophers[i].tlst_eat = -1;
 		philosophers[i].full = false;
@@ -38,7 +38,6 @@ t_philo	*init_philosophers(t_data *data)
 		if (pthread_mutex_init(&(philosophers[i].lock_lst_eat), NULL)
 			|| pthread_mutex_init(&philosophers[i].lock_full, NULL))
 			return (NULL);
-		i++;
 	}
 	return (philosophers);
 }

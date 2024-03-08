@@ -6,7 +6,7 @@
 /*   By: tsaint-p </var/spool/mail/tsaint-p>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 23:11:17 by tsaint-p          #+#    #+#             */
-/*   Updated: 2024/03/08 13:48:38 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:49:47 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	ft_pickup_forks(t_data *data, t_philo *philo)
 			print_msg(data, philo->index, E_FORK);
 		while (!stop(data))
 			usleep(5000);
-		pthread_mutex_unlock(philo->l_fork);
-		return (1);
+		return (pthread_mutex_unlock(philo->l_fork), 1);
 	}
 	else if (philo->index % 2)
 	{
